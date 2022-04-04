@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<!--
+Project name(项目名称)：HTML5_canvas_hatch
+  File name(文件名): test1
+  Authors(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/4/4
+  Time(创建时间)： 21:43
+  Description(描述)： 无
+-->
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        canvas {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px solid turquoise;
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="canvas" width="400" height="400">
+    浏览器不支持画布功能
+</canvas>
+
+<script>
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+
+    var img = new Image();
+    img.src = "pattern.png";
+    img.onload = function ()
+    {
+        //createPattern()方法使用指定的图像和重复创建图案。此方法返回一个CanvasPattern 。
+        // 此方法不会直接在画布上绘制任何内容。
+        // 它创建的图案必须分配给CanvasRenderingContext2D.fillStyle或CanvasRenderingContext2D.strokeStyle属性，
+        // 然后将其应用于任何后续绘图。
+        //"repeat" （两个方向）
+        //"repeat-x" （仅限水平）
+        // "repeat-y" （仅限垂直）
+        // "no-repeat" （两个方向）
+        // 如果repetition指定为空字符串 ( "" ) 或null （但不是undefined ），则将使用值"repeat" 。
+        var pattern = ctx.createPattern(img, "repeat");
+        ctx.beginPath();
+        ctx.arc(200, 200, 200, 0, Math.PI * 2, true);
+        ctx.stroke();
+        //设置填充颜色
+        ctx.fillStyle = pattern;
+        //填充图形
+        ctx.fill()
+    }
+</script>
+
+</body>
+</html>
